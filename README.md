@@ -69,20 +69,20 @@ Update configuration settings:
  If you want to use the same ASP.NET layout as your MVC app, add <base href="/"> on its header.
  It could be done in angular by programming too but be carreful, it will be new variable to set for deployment.
 
- Create a new view in your project. This view will be the host of the angular app. 
+ Create a new view in your project. This view will be the host of the angular app.
  In my POC, just another view named Angular linked to the Home controller with the same layout as the web app.
 
- Add the javascript links for the angular js files (another constrain to manage for deployment: theses files names) 
+ Add the javascript links for the angular js files (another constrain to manage for deployment: theses files names)
  and the app-root tag (It tells Angular where our angular components should be rendered)
 
- [Complete HTML of the Angular.cshtml view](./Views/Home/Angular.cshtml)
+ [Complete HTML of the Angular.cshtml view](./AspNetMVC5Angular5/Views/Home/Angular.cshtml)
 
 Add an action to your MVC controler for this view, a link to the view in your layout for example and that's it!
 
 ### Navigation
 
-How to navigate from your .Net part to your angular part? It's really not complicate but think about one thing: 
-everytime you want to display a .Net page with angular on it, you bootstrap the angular root module to launch the application. 
+How to navigate from your .Net part to your angular part? It's really not complicate but think about one thing:
+everytime you want to display a .Net page with angular on it, you bootstrap the angular root module to launch the application.
 It means angular will start everytime you are displaying a page in .Net with the angular js files on it.
 
 As a simple example, we will create a navigation in angular to show how the hybrid works (page1, page2, page3 and nav)
@@ -97,14 +97,14 @@ Create the 4 angular components: Navigate with command prompt to your Angular ro
 Your new components are created in AngularApp/src/app
 
 In AngularApp/src, create the new file app.routes.ts
-[app.routes.ts](./AngularApp/src/app/app.routes.ts)
+[app.routes.ts](./AspNetMVC5Angular5/AngularApp/src/app/app.routes.ts)
 
-In this POC, my .Net manage /Home/Angular to display my MVC view which will bootstrap Angular. 
-All the other asks after /Home/Angular/ (e.g. /Home/Angular/link1, /Home/Angular/etc/1) 
+In this POC, my .Net manage /Home/Angular to display my MVC view which will bootstrap Angular.
+All the other asks after /Home/Angular/ (e.g. /Home/Angular/link1, /Home/Angular/etc/1)
 will be managed by angular because the Angular router is loaded from it.
 
 In AngularApp/src/app.module.ts, Import the RouterModule and your ROUTES file
-[app.module.ts](./AngularApp/src/app/app.module.ts)
+[app.module.ts](./AspNetMVC5Angular5/AngularApp/src/app/app.module.ts)
 
 ````typescript
 import { RouterModule } from '@angular/router';
@@ -121,7 +121,7 @@ import { ROUTES } from './app.routes';
 ````
 
 Change the AngularApp/src/app/nav/nav.component.html HTML content
-[nav.component.html](./AngularApp/src/app/nav/nav.component.html)
+[nav.component.html](./AspNetMVC5Angular5/AngularApp/src/app/nav/nav.component.html)
 
 Note:
 - routerLink: navigate to Angular page
