@@ -1,7 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "Angular";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "Angular";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section Scripts {
@@ -12,6 +14,14 @@
     <script type="text/javascript" src="~/Scripts/angular/main.js"></script>
 }
 
+@Html.AntiForgeryToken()
+
 <h2>Angular</h2>
 
 <app-root></app-root>
+
+<script type="text/javascript">
+    window.customExchange = {
+        userName: '@User.Identity.Name'
+    }
+</script>

@@ -122,6 +122,8 @@ import { ROUTES } from './app.routes';
 
 Change the AngularApp/src/app/nav/nav.component.html HTML content
 [nav.component.html](./AspNetMVC5Angular5/AngularApp/src/app/nav/nav.component.html)
+On each page component (e.g. /AngularApp/src/app/page1/page1.component.html)
+add the `<app-nav></app-nav>` tag for having the nav component on each of them
 
 Note:
 - routerLink: navigate to Angular page
@@ -131,12 +133,56 @@ if HREF point to an .Net managed URL where ANgular is present, Angular will load
 
 You can test and and see you can navigate from .Net to Angular, Angular to .Net, navigate into Angular and even ask a refresh on the page where ANgular is present: it will manage the URL as well. Of course there is a boostrap and you must be aware about that.
 
-TBC with
-- data exchange in javascript (get the user profile for expl.)
-- forms authentication (yeah, it works)
-- Anti-forgery for protecting WEB API called by Angular
+### WEB APIs and Forms authentication
+
+As the Angular host page is a .Net page, this page is protected with the same level as the others. However, when you will use the Angular app, you have to implement your authorization layer on it for displaying a link or a button, based on the user role for example. I wont speak about that here, it's really pure Angular implementation. What is interesting for now is to be sure our frontend is safe enough for speaking with our backend thanks to the WEB APIs.
+
+Add the following controller for the POC: new WEB API 2 Controller with read/write actions
+
+We will protect this controller with a simple anti-forgery pattern (I'm not certain about this code, you will just have the operating principle for that). Create a class ValidateHttpAntiForgeryTokenAttribute.cs and [copy the following code on it](./AspNetMVC5Angular5/Controllers/ValidateHttpAntiForgeryTokenAttribute.cs)
+
+Now you can decorate your get with AUthorize and ValidateHttpAntiForgeryToken. [See the complete code here](./AspNetMVC5Angular5/Controllers/AngularController.cs)
+
+````
+    // GET: api/Angular
+    [Authorize]
+    [ValidateHttpAntiForgeryToken]
+    public IEnumerable<string> Get()
+    {
+       ...
+````
+
+Now we will call this WEB API controller from Angular.
+
+Be sure you have the `@Html.AntiForgeryToken()` on your page which host the angular app
+[Complete HTML of the Angular.cshtml view](./AspNetMVC5Angular5/Views/Home/Angular.cshtml)
+
+
+On your main Angular module, add the HttpClientModule module.
+[app.module.ts](./AspNetMVC5Angular5/AngularApp/src/app/app.module.ts)
+
+````typescript
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+  ...
+  imports: [
+      HttpClientModule,
+  ],
+})
+````
+principle: we will get the RequestVerificationToken value and add it into the request header.
+For example on page2, change the code in the [typescript file](./AspNetMVC5Angular5/AngularApp/src/app/page2/page2.component.ts) for making the call and in the [html file](./AspNetMVC5Angular5/AngularApp/src/app/page2/page2.component.html) for displying the result.
+
+### javascript context exchange
+
+It's a quick and really durty solution to use if really you need to exchange public js data from .Net to Angular.
+
+- On the Angular host page, attach to the window object the data you want to exchange [see script at the bottom](./AspNetMVC5Angular5/Views/Home/Angular.cshtml)
+- In an Angular view, just read this data in the [typescript file](./AspNetMVC5Angular5/AngularApp/src/app/page1/page1.component.ts) and display them in the [HTML file](./AspNetMVC5Angular5/AngularApp/src/app/page1/page1.component.html)
 
 
 Thanks for the help:
 - [MITHUN PATTANKAR](http://www.mithunvp.com/angular-asp-net-mvc-5-angular-cli-visual-studio-2017/)
+- [Kamranicus](https://kamranicus.com/posts/2013-04-24-protip-using-anti-forgery-token-with-aspnet-web-ap)
 

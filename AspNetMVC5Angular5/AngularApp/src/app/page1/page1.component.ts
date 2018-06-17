@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Page1Component implements OnInit {
 
-  constructor() { }
+  userInfo: any = undefined;
+
+  constructor() {
+    this.userInfo = (<any>window).customExchange;
+  }
 
   ngOnInit() {
   }

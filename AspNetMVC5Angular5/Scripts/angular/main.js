@@ -178,7 +178,7 @@ var ROUTES = [
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".btn-default {\r\n  margin-bottom: 1em;\r\n}\r\n"
 
 /***/ }),
 
@@ -189,7 +189,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<a class=\"btn btn-default\"\r\n   routerLink=\"/Home/Angular/page1\"\r\n   routerLinkActive=\"active\"\r\n   href=\"#\" role=\"button\">Page 1</a>\r\n<a class=\"btn btn-default\"\r\n   routerLink=\"/Home/Angular/page2\"\r\n   routerLinkActive=\"active\"\r\n   href=\"#\" role=\"button\">Page 2</a>\r\n<a class=\"btn btn-default\"\r\n   routerLink=\"/Home/Angular/page3\"\r\n   routerLinkActive=\"active\"\r\n   href=\"#\" role=\"button\">Page 3</a>\r\n<a class=\"btn btn-default\"\r\n   href=\"/Home/Index\" role=\"button\">.Net nav -> Index</a>\r\n<a class=\"btn btn-default\"\r\n   href=\"/Home/Angular/page2\" role=\"button\">Angular with page reload -> page 2</a>\r\n\r\n\r\n\r\n"
+module.exports = "<a class=\"btn btn-default\"\r\n   routerLink=\"/Home/Angular/page1\"\r\n   routerLinkActive=\"active\"\r\n   href=\"#\" role=\"button\">Page 1: Javascript exchange</a>\r\n<a class=\"btn btn-default\"\r\n   routerLink=\"/Home/Angular/page2\"\r\n   routerLinkActive=\"active\"\r\n   href=\"#\" role=\"button\">Page 2: WEB API call</a>\r\n<a class=\"btn btn-default\"\r\n   routerLink=\"/Home/Angular/page3\"\r\n   routerLinkActive=\"active\"\r\n   href=\"#\" role=\"button\">Page 3</a>\r\n<a class=\"btn btn-default\"\r\n   href=\"/Home/Index\" role=\"button\">.Net nav -> Index</a>\r\n<a class=\"btn btn-default\"\r\n   href=\"/Home/Angular/page3\" role=\"button\">Angular with page reload -> page 3</a>\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -252,7 +252,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-nav></app-nav>\n<p>\n  page1 works!\n</p>\n"
+module.exports = "<app-nav></app-nav>\n<p>\r\n  User name: {{ userInfo.userName }}\r\n</p>\n"
 
 /***/ }),
 
@@ -279,6 +279,8 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var Page1Component = /** @class */ (function () {
     function Page1Component() {
+        this.userInfo = undefined;
+        this.userInfo = window.customExchange;
     }
     Page1Component.prototype.ngOnInit = function () {
     };
@@ -315,7 +317,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-nav></app-nav>\n<p>\n  page2 works!\n</p>\n"
+module.exports = "<app-nav></app-nav>\n<ul>\r\n  <li *ngFor=\"let item of serverList\">\r\n    {{item}}\r\n  </li>\r\n</ul>\n"
 
 /***/ }),
 
@@ -330,6 +332,7 @@ module.exports = "<app-nav></app-nav>\n<p>\n  page2 works!\n</p>\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Page2Component", function() { return Page2Component; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -340,8 +343,20 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var Page2Component = /** @class */ (function () {
-    function Page2Component() {
+    function Page2Component(http) {
+        var _this = this;
+        this.http = http;
+        var csrfToken = document.getElementsByName('__RequestVerificationToken')[0].value;
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]();
+        headers.set('X-XSRF-Token', csrfToken);
+        http.get("/api/angular", {
+            headers: { 'X-XSRF-Token': csrfToken }
+        })
+            .subscribe(function (response) {
+            _this.serverList = response;
+        }, function (err) { console.log('There is an error:', err); });
     }
     Page2Component.prototype.ngOnInit = function () {
     };
@@ -351,7 +366,7 @@ var Page2Component = /** @class */ (function () {
             template: __webpack_require__(/*! ./page2.component.html */ "./src/app/page2/page2.component.html"),
             styles: [__webpack_require__(/*! ./page2.component.css */ "./src/app/page2/page2.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], Page2Component);
     return Page2Component;
 }());
