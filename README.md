@@ -66,7 +66,7 @@ Update configuration settings:
 			...
 ````
 
- If you want to use the same ASP.NET layout as your MVC app, add <base href="/"> on its header.
+ If you want to use the same ASP.NET layout as your MVC app, add `<base href="/">` on its header.
  It could be done in angular by programming too but be carreful, it will be new variable to set for deployment.
 
  Create a new view in your project. This view will be the host of the angular app.
