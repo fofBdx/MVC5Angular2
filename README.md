@@ -22,6 +22,18 @@ Installation:
 - after npm install from the same folder in command prompt: ng build --watch
 - In solution -> start debbuging
 
+If problem with database creation (Cannot attach the file and so on...) 
+Open the package manager console in VS:
+> Add-migration repair
+> Update-database
+
+Emergency only:)
+> sqllocaldb.exe stop 
+> sqllocaldb.exe delete 
+> sqllocaldb.exe start 
+> Add-migration repair
+> Update-database
+
 ### stack
 
 .NET
