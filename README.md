@@ -24,15 +24,19 @@ Installation:
 
 If problem with database creation (Cannot attach the file and so on...) 
 Open the package manager console in VS:
+````
 > Add-migration repair
 > Update-database
+````
 
 Emergency only:)
+````
 > sqllocaldb.exe stop 
 > sqllocaldb.exe delete 
 > sqllocaldb.exe start 
 > Add-migration repair
 > Update-database
+````
 
 ### stack
 
