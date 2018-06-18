@@ -1,11 +1,11 @@
 # ASP.NET MVC With Angular 2+
 
-How to add Angular 2+ (NOT angular.js so) to an existing ASP.NET MVC With Razor or form engine project for having an hybrid front-end.
+How to add Angular 2+ (NOT angular.js so) to an existing ASP.NET MVC With Razor or Aspx View engine project for having a hybrid front-end.
 
-Made with MVC5 but the principle is the same with core if Razor is used.
+Made with MVC5 but the principle is the same with Core if server side rendering is used.
 
-- How to integrate the angular app
-- How to make WEP API calls with the same authentication tocken and anti-forgery
+- How to integrate the Angular app
+- How to make WEP API calls with the same authentication token and anti-forgery
 - How to exchange data by javascript
 
 ## run the POC
