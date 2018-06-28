@@ -6,6 +6,7 @@ Made with MVC5 but the principle is the same with Core if server side rendering 
 
 - How to integrate the Angular app
 - How to make WEP API calls with the same authentication token and anti-forgery
+- How to manage the navigation
 - How to exchange data by javascript
 
 ## run the POC
