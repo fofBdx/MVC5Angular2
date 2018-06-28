@@ -20,8 +20,8 @@ Installation:
 - Get the repo
 - Open the solution -> manage NuGet packages -> restore
 - Navigate with command prompt to the AngularApp folder into the project -> npm install
-- after npm install from the same folder in command prompt: npm start
-- In solution -> start debbuging
+- after npm install from the same folder in command prompt: npm run-script build-watch 
+- In Visual Studio -> start debbuging
 
 If problem with database creation (Cannot attach the file and so on...) 
 Open the package manager console in VS:
